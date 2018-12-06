@@ -1,0 +1,23 @@
+table {
+  table-layout: fixed;
+  width: 50%;
+  border-collapse: collapse;
+}
+
+tbody tr {
+    cursor:pointer;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #dedede;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+tbody tr:hover {
+    background-color:#ddeedd;
+}
+
+

@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>ProtMapMS3 - Web</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="viewer/css/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="app">
+            <form>
+                <select v-model="accession">
+                    <option value="NULL">--Select One--</option>
+                    <option v-for="(value,key) in peakAreas" v-bind:value="key">{{geneName(key)}}</option>     
+                </select>
+                <select v-model="threshold">
+                    <option value="0">threshold=0</option>
+                    <option value="1.5">threshold=1.5</option>
+                    <option value="2.0">threshold=2.0</option>
+                </select>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Accession</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>S_Key</th>
+                        <th>L_Area</th>
+                        <th>UL_Area</th>
+                        <th>%L_Area</th>
+                        <th>R_0/1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-bind:style="rowSelectedStyle(index)" v-on:click="render(index,value);render2(0,value);" v-for="(value,index) in peptideAreas">
+                        <td>{{geneName(value.accession)}}</td>
+                        <td>{{value.p_start}}</td>
+                        <td>{{value.p_end}}</td>
+                        <td>{{value.spectrum}}</td>
+                        <td>{{value.labeled}}</td>
+                        <td>{{value.unlabeled}}</td>
+                        <td>{{value.ratio}}</td>
+                        <td>{{value["c-ratio"]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <canvas style="position:fixed;top:0px;right:0px" id="ms1" width="800" height="380"></canvas>
+            <canvas style="position:fixed;bottom:0px;right:0px" id="ms2" width="800" height="380"></canvas>
+        </div>
+        <script src="viewer/js/vue/vue.js"></script>
+        <script src="viewer/js/axios/axios.min.js"></script>
+        <script src="viewer/js/MS1Chromatogram.js"></script>
+        <script src="viewer/js/app.js"></script>
+    </body>
+</html>
